@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+         <script>
+            function dragStart(event) {
+                event.dataTransfer.setData("id", event.target.id);
+            }
+
+            function dragging(event) {
+               // document.getElementById("demo").innerHTML = "The p element is being dragged";
+            }
+
+            function allowDrop(event) {
+              
+                var data =  event.dataTransfer.getData("id");
+                var x = document.getElementById("mySelect").selectedIndex;
+                var y = document.getElementById("mySelect").options;
+                var res= y[x].text;
+
+                if(data==res){              
+                event.preventDefault();
+                }
+            }
+
+            function drop(event) {
+                event.preventDefault();
+                var data = event.dataTransfer.getData("id");
+                event.target.appendChild(document.getElementById(data));
+                //document.getElementById("demo").innerHTML = "The p element was dropped";
+            }
+
+        </script>
+    </head>
+    <body>
+        <div>
+            
+            <select id="mySelect">
+                <option>blanc</option>
+                <option>blau</option>
+                <option>negre</option>
+                <option>rosat</option>
+            </select>
+            <img src="img0.jpg" id="blanc" draggable="true" ondragstart="dragStart(event)"/>1
+            <img src="img1.jpg" id="blau" draggable="true" ondragstart="dragStart(event)"/>2
+            <img src="img2.jpg" id="negre" draggable="true" ondragstart="dragStart(event)"/>3
+            <img src="img3.jpg" id="rosat" draggable="true" ondragstart="dragStart(event)"/>4
+            <div style="width: 300px; height: 300px; border: solid #000 1px" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+        </div>
+    </body>
+</html>

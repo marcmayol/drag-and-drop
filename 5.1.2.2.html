@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            div{
+                width: 150px;
+                height: 100px;
+                border: 1px solid #000;
+                margin: 10px;
+            }
+            img{
+                width: 100px;
+                height: 100px;
+                margin: 10px;
+            }
+        </style>
+        <script>
+            function dragStart(event) {
+                event.dataTransfer.setData("id", event.target.id);
+            }
+
+            function dragging(event) {
+               // document.getElementById("demo").innerHTML = "The p element is being dragged";
+            }
+
+            function allowDrop(event) {
+              
+                var data =  event.dataTransfer.getData("id");
+              
+                if((data=="drag1") && (event.target.id == "div1")||(data=="drag2") && (event.target.id=="div2")){
+              
+                event.preventDefault();
+                }
+            }
+
+            function drop(event) {
+                event.preventDefault();
+                var data = event.dataTransfer.getData("id");
+                event.target.appendChild(document.getElementById(data));
+                //document.getElementById("demo").innerHTML = "The p element was dropped";
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="div1" class="div" ondrop="drop(event)" ondragover="allowDrop(event)"> </div>
+        <div id="div2" class="div" ondrop="drop(event)" ondragover="allowDrop(event)"> </div>
+        <img id="drag1" src="ojo1.jpg" class="img" draggable="true" ondragstart="dragStart(event)"/>
+        <img id="drag2" src="ojo2.jpg" class="img" draggable="true"  ondragstart="dragStart(event)"/>
+    </body>
+</html>
